@@ -24,8 +24,7 @@ END procedury;
 
 CREATE OR REPLACE PACKAGE BODY procedury AS
 
---procedura wypisujaca zawartosc magazynu 
---A procedure listing the contents of the warehouse.
+-- A procedure listing the contents of the warehouse.
 PROCEDURE warehouse_content
 (p_id_magazynu IN lokalizacje.id_magazynu%TYPE,
 p_id_zywnosci OUT stany_magazynowe.id_zywnosci%TYPE,
@@ -37,7 +36,6 @@ from stany_magazynowe s join lokalizacje l on (s.id_lokalizacji = l.id_lokalizac
 WHERE id_magazynu = p_id_magazynu;
 END warehouse_content;
 
---procedura zwracajaca skladnik, na ktory dany zalogant ma alergie
 --A procedure returning the ingredient to which a given user is allergic
 PROCEDURE allergies
 (p_id_zaloganta IN alergie.id_zaloganta%TYPE,
@@ -50,7 +48,6 @@ from alergie  join skladniki USING (id_skladnika)
 WHERE id_zaloganta = p_id_zaloganta;
 END allergies;
 
---procedura znajdujaca RYZ w magazynie
 --A procedure finding RICE in the warehouse
 PROCEDURE food_type 
 (p_nazwa_z IN zywnosc.nazwa%TYPE) IS
@@ -76,7 +73,6 @@ dbms_output.put_line('M_NAZWA: '||M_NAZWA||' M_POLOZENIE: '||M_POLOZENIE||' REGA
 end;
 END food_type;
 
---procedura wyszukujaca zalogantow z alergia na dany skladnik
 --A procedure searching for users with an allergy to a specific ingredient
 PROCEDURE crew_allergies
 (p_id_zaloganta OUT alergie.id_zaloganta%TYPE,
@@ -87,7 +83,6 @@ from skladniki s join alergie a on (s.id_skladnika = a.id_skladnika)
 WHERE nazwa = p_nazwa;
 END crew_allergies;
 
---funkcja sprawdzajaca czy ilosc paczek zywnosci jest wieksza niz 45
 --A function checking if the quantity of food packages is greater than 45
 FUNCTION package_count  
 (nazwa IN magazyn.nazwa%TYPE) 
@@ -101,8 +96,6 @@ WHERE S.ILOSC>45;
 RETURN ILOSC;
 END package_count;
 
-
---funkcja pokazujaca zywnosc, dla ktorej data waznosci jest krotsza niz miesiac
 --A function displaying food items with an expiration date less than a month
 FUNCTION expiration_date  
 (f_data_waznosci IN zywnosc.data_waznosci%TYPE) 
@@ -114,7 +107,6 @@ FROM ZYWNOSC WHERE DATA_WAZNOSCI < Add_months(current_date,1);
 RETURN DATA_UPLYWA;
 END expiration_date;
 
---funkcja sprawdzajaca czy ilosc kalorii w posilku jest odpowiednia
 --A function checking if the calorie count in a meal is appropriate
 CREATE OR REPLACE FUNCTION Calories_check  
 (id_posilku IN posilki.id_posilku%TYPE) 
