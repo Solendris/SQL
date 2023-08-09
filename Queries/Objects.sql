@@ -1,5 +1,4 @@
---obiekt przechowujący dane o alergiach
---object storing allergy data
+-- Object storing allergy data
 create type alergie_obiekt as object (
 nazwa_alergii varchar2(25),
 rodzaj_alergii varchar2(25),
@@ -21,8 +20,7 @@ INSERT INTO zaloga_alergie VALUES (3, 'Jan', 'Nowak', lista_alergii(alergie_obie
 
 SELECT * FROM zaloga_alergie CROSS JOIN TABLE(zaloga_alergie.alergia);
 
---obiekt przechowujący dane o stanowisku
---object storing position data
+-- Object storing position data
 create type rola as object (
 stanowisko varchar2(25),
 staz_lata number(3)
@@ -41,8 +39,7 @@ INSERT INTO zaloganci VALUES ('1', 'Jan', 'Kowalski', rola_lista(rola('dyrektor'
 
 SELECT * FROM zaloganci CROSS JOIN TABLE(zaloganci.role);
 
---obiekt przechowujacy informacje o diecie zaloganta
---object storing information about the user's diet
+-- Object storing information about the user's diet
 create type zalecenia_obiekt as object (
 Osoba_wystawiajaca varchar2(60),
 cel_diety varchar2(50),
